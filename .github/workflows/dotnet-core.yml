@@ -30,6 +30,6 @@ jobs:
     - name: Pack
       run: dotnet pack --no-build -o publish -c Release Privatbank.Business
     - name: Push
-      run: dotnet nuget push publish/* --source "github"
+      run: dotnet nuget push publish --source "github"
       
  
