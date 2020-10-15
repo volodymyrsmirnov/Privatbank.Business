@@ -29,10 +29,13 @@ jobs:
       env:
         CLIENT_ID: ${{ secrets.CLIENT_ID }}
         CLIENT_TOKEN: ${{ secrets.CLIENT_TOKEN }}
-        PAYER_ACCOUNT: ${{ secrets.PAYER_ACCOUNT }}  
+        PAYER_ACCOUNT: ${{ secrets.PAYER_ACCOUNT }}
     
+    - name: Pack
+      run: dotnet pack --no-build -c Release Privatbank.Business -o publish
+      
     - name: Upload a NuGet Package
       uses: actions/upload-artifact@v2.2.0
       with:
         name: NuGet Package
-        path: package
+        path: publish
