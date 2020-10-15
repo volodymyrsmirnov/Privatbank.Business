@@ -139,7 +139,7 @@ namespace Privatbank.Business.Data.Models
         /// </summary>
         [JsonPropertyName("date_close_acc")]
         [JsonConverter(typeof(StringDateTimeConverter))]
-        public DateTime? CloseAccountDateTime { get; set; }
+        public DateTime CloseAccountDateTime { get; set; }
 
         /// <summary>
         /// Is a final state of a balance.
