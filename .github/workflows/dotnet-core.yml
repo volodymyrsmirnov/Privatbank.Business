@@ -20,7 +20,7 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release --no-restore
     - name: Test
-      run: dotnet test --no-restore --verbosity normal
+      run: dotnet test -v minimal --no-restore
       env:
         CLIENT_ID: ${{ secrets.CLIENT_ID }}
         CLIENT_TOKEN: ${{ secrets.CLIENT_TOKEN }}
@@ -30,6 +30,6 @@ jobs:
     - name: Pack
       run: dotnet pack --no-build -o publish -c Release Privatbank.Business
     - name: Push
-      run: dotnet push publish/* --source "github"
+      run: dotnet nuget push publish/* --source "github"
       
  
