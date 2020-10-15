@@ -25,12 +25,11 @@ jobs:
         CLIENT_ID: ${{ secrets.CLIENT_ID }}
         CLIENT_TOKEN: ${{ secrets.CLIENT_TOKEN }}
         PAYER_ACCOUNT: ${{ secrets.PAYER_ACCOUNT }}
+    - name: Authenticate
+      run: dotnet nuget add source https://nuget.pkg.github.com/mindcollapse/index.json -n github -u mindcollapse -p ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text
     - name: Pack
       run: dotnet pack --no-build -o publish -c Release Privatbank.Business
-    - name: Upload a Build Artifact
-      uses: actions/upload-artifact@v2.2.0
-      with:
-        name: NuGet Package
-        path: publish/*
+    - name: Push
+      run: dotnet push publish/* --source "github"
       
  
