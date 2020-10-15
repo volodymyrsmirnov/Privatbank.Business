@@ -13,7 +13,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Ukraine.Bank.Privatbank\Ukraine.Bank.Privatbank.csproj" />
+      <ProjectReference Include="..\Privatbank.Business\Privatbank.Business.csproj" />
     </ItemGroup>
 
 </Project>

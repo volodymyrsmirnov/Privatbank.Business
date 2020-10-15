@@ -4,9 +4,9 @@ using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Ukraine.Bank.Privatbank.Converters
+namespace Privatbank.Business.Converters
 {
-    internal class DateTimeArrayConverter : JsonConverter<DateTime[]>
+    internal class StringDateTimeArrayConverter : JsonConverter<DateTime[]>
     {
         public override DateTime[] Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {

@@ -1,11 +1,11 @@
 using System.Text.Json.Serialization;
-using Ukraine.Bank.Privatbank.Data.Models;
+using Privatbank.Business.Data.Models;
 
-namespace Ukraine.Bank.Privatbank.Data.Responses
+namespace Privatbank.Business.Data.Responses
 {
     internal class BalancesResponse : BasicResponse
     {
-        [JsonPropertyName("balances")] 
+        [JsonPropertyName("balances")]
         public Balance[] Balances { get; set; }
     }
 }

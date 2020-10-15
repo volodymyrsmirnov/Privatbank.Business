@@ -1,10 +1,11 @@
 using System;
+using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Ukraine.Bank.Privatbank.Converters
+namespace Privatbank.Business.Converters
 {
-    public class DecimalConverter : JsonConverter<decimal>
+    internal class StringDecimalConverter : JsonConverter<decimal>
     {
         public override decimal Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
@@ -13,7 +14,8 @@ namespace Ukraine.Bank.Privatbank.Converters
 
         public override void Write(Utf8JsonWriter writer, decimal value, JsonSerializerOptions options)
         {
-            throw new NotImplementedException();
+            writer.WriteStringValue(
+                value.ToString(CultureInfo.InvariantCulture));
         }
     }
 }

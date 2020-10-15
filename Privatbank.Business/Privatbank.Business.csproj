@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <Title>Privatbank API AutoClient</Title>
+        <Description>Client for the Privatbank AutoClient API to get balance shees, transactions and create new outgoing payments for the corporate users.</Description>
+        <Copyright>Volodymyr Smirnov</Copyright>
+        <PackageProjectUrl>https://github.com/mindcollapse/Privatbank.Business</PackageProjectUrl>
+        <PackageLicenseUrl>https://github.com/mindcollapse/Privatbank.Business/blob/master/LICENSE</PackageLicenseUrl>
+        <RepositoryUrl>https://github.com/mindcollapse/Privatbank.Business</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageTags>privatbank;api;ukraine</PackageTags>
+        <AssemblyVersion>1.0.0</AssemblyVersion>
+        <FileVersion>1.0.0</FileVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="System.Text.Json" Version="4.7.2" />
+    </ItemGroup>
+
+</Project>

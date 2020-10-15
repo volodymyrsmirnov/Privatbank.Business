@@ -1,8 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Bank.Privatbank", "Ukraine.Bank.Privatbank\Ukraine.Bank.Privatbank.csproj", "{F5347390-ACA5-408D-8D2C-4D76BBFDA40C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Privatbank.Business", "Privatbank.Business\Privatbank.Business.csproj", "{F5347390-ACA5-408D-8D2C-4D76BBFDA40C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukraine.Bank.Privatbank.Test", "Ukraine.Bank.Privatbank.Test\Ukraine.Bank.Privatbank.Test.csproj", "{7AB15BD9-615E-4B5E-8F77-53FF90C72160}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Privatbank.Business.Tests", "Privatbank.Business.Tests\Privatbank.Business.Tests.csproj", "{7AB15BD9-615E-4B5E-8F77-53FF90C72160}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

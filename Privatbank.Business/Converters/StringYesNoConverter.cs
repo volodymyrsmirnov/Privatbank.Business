@@ -2,9 +2,9 @@ using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Ukraine.Bank.Privatbank.Converters
+namespace Privatbank.Business.Converters
 {
-    internal class YesNoConverter : JsonConverter<bool>
+    internal class StringYesNoConverter : JsonConverter<bool>
     {
         public override bool Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
