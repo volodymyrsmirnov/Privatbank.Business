@@ -1,9 +1,7 @@
-name: .NET Core
+name: Build NuGet
 
 on:
   push:
-    branches: [ master ]
-  pull_request:
     branches: [ master ]
 
 jobs:
@@ -23,3 +21,11 @@ jobs:
       run: dotnet build --configuration Release --no-restore
     - name: Test
       run: dotnet test --no-restore --verbosity normal
+      env:
+        CLIENT_ID: ${{ secrets.CLIENT_ID }}
+        CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+        PAYER_ACCOUNT: ${{ secrets.PAYER_ACCOUNT }}
+    - name: Pack
+      run: dotnet pack --no-build -o publish -c Release Privatbank.Business
+      
+ 
