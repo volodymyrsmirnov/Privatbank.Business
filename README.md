@@ -1,10 +1,10 @@
 # Privatbank API AutoClient
 
-This library allows you to quickly and easily use the Privatank AutoClient API for obtaining balance sheets, 
-transactions and creating outgoing payments for the corporate users (legal entities and entrepreneurs).
+![Privatbank.Business](https://github.com/mindcollapse/Privatbank.Business/workflows/Privatbank.Business/badge.svg)
 
-For now, this library does not have a functionality to querying exchange rates, working with digital documents
-and e-statements. Feel free to send PRs or raise an issue if you need them.  
+This library allows you to quickly and easily use the Privatbank AutoClient API for obtaining balance sheets, transactions and creating outgoing payments for the corporate users (legal entities and entrepreneurs).
+
+For now, this library does not have a functionality to querying exchange rates, working with digital documents and e-statements. Feel free to send PRs or raise an issue if you need them.  
 
 ## Installation 
 
@@ -34,8 +34,6 @@ Please see the [.csproj file](Privatbank.Business/Privatbank.Business.csproj).
 
 ## Documentation
 
-Please see documentation string in [PrivatBankAutoClient.cs](Privatbank.Business/PrivatbankAutoClient.cs), 
-[Privatbank.Business.Data.Models](Privatbank.Business/Data/Models) and 
-[Privatbank.Business.Exceptions](Privatbank.Business/Exceptions) namespaces.
+Please see documentation string in [PrivatBankAutoClient.cs](Privatbank.Business/PrivatbankAutoClient.cs), [Privatbank.Business.Data.Models](Privatbank.Business/Data/Models) and [Privatbank.Business.Exceptions](Privatbank.Business/Exceptions) namespaces.
 
 You can also check [tests](Privatbank.Business.Tests/PrivatBankAutoClient.cs) for basic usage examples.
