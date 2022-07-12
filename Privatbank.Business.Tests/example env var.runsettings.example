@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+  <!-- configuration elements -->
+<RunSettings>
+  <RunConfiguration>
+    <EnvironmentVariables>
+      <!-- List of environment variables we want to set-->
+      <CLIENT_TOKEN>your_client_token</CLIENT_TOKEN>
+    </EnvironmentVariables>
+  </RunConfiguration>
+</RunSettings>

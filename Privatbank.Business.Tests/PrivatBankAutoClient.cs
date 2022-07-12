@@ -13,7 +13,6 @@ namespace Privatbank.Business.Tests
         public void SetUp()
         {
             _client = new PrivatbankAutoClient(
-                Environment.GetEnvironmentVariable("CLIENT_ID"),
                 Environment.GetEnvironmentVariable("CLIENT_TOKEN"));
         }
 
@@ -80,7 +79,7 @@ namespace Privatbank.Business.Tests
             Assert.NotNull(result);
         }
 
-        [Test]
+        /*[Test]
         public async Task TestCreatePayment()
         {
             var result = await _client.CreatePaymentAsync(new Payment
@@ -97,7 +96,7 @@ namespace Privatbank.Business.Tests
 
             Assert.NotNull(result.Reference);
             Assert.NotNull(result.PackedReference);
-        }
+    }*/
 
         [TearDown]
         public void TearDown()

@@ -12,7 +12,7 @@ using Privatbank.Business.Exceptions;
 namespace Privatbank.Business
 {
     /// <summary>
-    /// Privatbank API AutoClient. 
+    /// Privatbank API AutoClient. for api 3.0.0
     /// </summary>
     public class PrivatbankAutoClient : IDisposable
     {
@@ -23,23 +23,16 @@ namespace Privatbank.Business
         /// <summary>
         /// Initialize API AutoClient.
         /// </summary>
-        /// <param name="clientId">Client id.</param>
         /// <param name="clientToken">Client token.</param>
         /// <exception cref="ArgumentNullException">Mandatory parameter has not been provided.</exception>
-        public PrivatbankAutoClient(string clientId, string clientToken)
+        public PrivatbankAutoClient(string clientToken)
         {
-            if (string.IsNullOrEmpty(clientId))
-                throw new ArgumentNullException(nameof(clientId));
-
             if (string.IsNullOrEmpty(clientToken))
                 throw new ArgumentNullException(nameof(clientToken));
 
-            _httpClient = new HttpClient
-            {
+            _httpClient = new HttpClient {
                 BaseAddress = new Uri(ApiBaseAddress)
             };
-
-            _httpClient.DefaultRequestHeaders.Add("id", clientId);
             _httpClient.DefaultRequestHeaders.Add("token", clientToken);
         }
 
