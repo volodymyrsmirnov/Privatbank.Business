@@ -44,11 +44,12 @@ namespace Privatbank.Business
             _httpClient.Dispose();
         }
 
-        private async Task<TResponse> GetDataFromApi<TResponse>(string uri) where TResponse : BasicResponse
-        {
-            var response = await _httpClient.PostAsync(uri,
-                new StringContent(string.Empty, Encoding.UTF8, "application/json"));
-
+        private async Task<TResponse> GetDataFromApi<TResponse>(string uri) where TResponse : BasicResponse {
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, uri);
+            // the only normal way to set encoding for a request, it seems
+            request.Content = new StringContent(string.Empty, Encoding.UTF8, "application/json"); ;
+            
+            var response = await _httpClient.SendAsync(request);
             var data = await JsonSerializer.DeserializeAsync<TResponse>(
                 await response.Content.ReadAsStreamAsync());
 
@@ -124,11 +125,10 @@ namespace Privatbank.Business
         /// <param name="payment"><see cref="Payment"/></param>
         /// <returns><see cref="PaymentResult"/></returns>
         /// <exception cref="PrivatbankResponseException">Error occured during the payment creation.</exception>
-        public async Task<PaymentResult> CreatePaymentAsync(Payment payment)
-        {
+        public async Task<PaymentResult> CreatePaymentAsync(Payment payment) {
             var response = await _httpClient.PostAsync("proxy/payment/create",
                 new StringContent(JsonSerializer.Serialize(payment), Encoding.UTF8, "application/json"));
-            
+
             if (response.IsSuccessStatusCode)
                 return await JsonSerializer.DeserializeAsync<PaymentResult>(
                     await response.Content.ReadAsStreamAsync());
@@ -151,8 +151,7 @@ namespace Privatbank.Business
         /// <param name="endDate">End date.</param>
         /// <returns><see cref="Balance"/></returns>
         public async Task<Balance[]> GetBalanceAsync(DateTime startDate, string account = null,
-            DateTime? endDate = null)
-        {
+            DateTime? endDate = null) {
             return await GetRecordsFromApi<BalancesResponse, Balance>(
                 "statements/balance", r => r.Balances, account, startDate, endDate);
         }
