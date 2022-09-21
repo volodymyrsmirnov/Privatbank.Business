@@ -6,11 +6,11 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using System.Web;
 using Privatbank.Business.Data.Models;
+using Privatbank.Business.Data.Models.SalaryProjects;
 using Privatbank.Business.Data.Responses;
 using Privatbank.Business.Exceptions;
 
-namespace Privatbank.Business
-{
+namespace Privatbank.Business {
     /// <summary>
     /// Privatbank API AutoClient. for api 3.0.0
     /// </summary>
@@ -219,5 +219,14 @@ namespace Privatbank.Business
         }
 
         #endregion
+
+        /// <summary>
+        /// Get salary groups.
+        /// </summary>
+        /// <returns><see cref="Group"/></returns>
+        public async Task<Group[]> GetGroupsAsync() {
+            return await GetRecordsFromApi<GroupsResponse, Group>(
+                "pay/mp/list-groups", r => r.Groups);
+        }
     }
 }
