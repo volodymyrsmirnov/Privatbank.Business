@@ -53,7 +53,7 @@ namespace Privatbank.Business.Data.Models.SalaryProjects {
         /// status code
         /// </summary>
         [JsonPropertyName("status")]
-        public string/*Packet_Element_Status*/ status { get; set; }
+        public Packet_Element_Status status { get; set; }
 
         /// <summary>
         /// err code
