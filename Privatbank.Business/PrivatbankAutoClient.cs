@@ -228,5 +228,52 @@ namespace Privatbank.Business {
             return await GetRecordsFromApi<GroupsResponse, Group>(
                 "pay/mp/list-groups", r => r.Groups);
         }
+
+        /// <summary>
+        /// return Packets list, these are salary project packets 
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<Packet>> GetPacketsAsync(DateTime from, DateTime to) {
+            // IMPORTANT: this code reapeats? I dont want to refactor the whole nuget for this
+            List<Packet> result = new List<Packet>();
+            PacketsResponse responce;
+            string api_path;
+            int page = 0, page_size = 100; //page_size max 100 for api
+            // this is ugly because there already is  method for pagination? yes, but it uses other query parameters, so no.
+            do {
+                api_path = $"pay/apay24/packets/list?page={page}&page-size={page_size}&from={from:yyyy-MM-dd}&to={to:yyyy-MM-dd}";
+                responce = await GetDataFromApi<PacketsResponse>(api_path);
+
+                result.AddRange(responce.Packets);
+                page++;
+            } while (responce.Packets.Length == 100);
+            return result;
+        }
+
+        /// <summary>
+        /// get packet entries af a packet
+        /// </summary>
+        /// <param name="packet">a packet returned by api peforehand, or just it ref num</param>
+        /// <returns>list of all entries for a specific packet</returns>
+        public async Task<List<PacketEntrie>> GetPacketEntriesAsync(Packet packet) {
+            // IMPORTANT: this code reapeats? I dont want to refactor the whole nuget for this
+            // no switch because there is no public api for any other then "maspay", although I`m sure the other one is identical
+            // and has endpoint */reqpay/*
+            // so for know - no
+            //switch (packet.system)
+            List<PacketEntrie> result = new List<PacketEntrie>();
+            PacketEntriesResponse responce;
+            string api_path;
+            int page = 0, page_size = 100; //page_size max 100 for api
+            // this is ugly because there already is  method for pagination? yes, but it uses other query parameters, so no.
+            do {
+                api_path = $"pay/maspay/{packet.reference}/content?page={page}&page-size={page_size}";
+                responce = await GetDataFromApi<PacketEntriesResponse>(api_path);
+
+                result.AddRange(responce.PacketEntries);
+                page++;
+            } while (responce.PacketEntries.Length == 100);
+            return result;
+        }
     }
 }

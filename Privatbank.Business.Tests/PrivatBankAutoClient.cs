@@ -85,7 +85,28 @@ namespace Privatbank.Business.Tests
             }
             Assert.NotNull(result);
         }
-        
+
+        [Test]
+        public async Task TestGetPackets() {
+            var result = await _client.GetPacketsAsync(new DateTime(2022, 1, 1), new DateTime(2023, 1, 1));
+            if (result.Count != 0) {
+                Assert.IsTrue(result[0].amount >= 0);
+            }
+            Assert.NotNull(result);
+        }
+        [Test]
+        public async Task TestGetPacketElements() {
+            var packets = await _client.GetPacketsAsync(new DateTime(2022, 1, 1), new DateTime(2023, 1, 1));
+            if (packets.Count == 0) {
+                return;
+            }
+            var elements = await _client.GetPacketEntriesAsync(packets[0]);
+            if (elements.Count > 0) {
+                Assert.IsTrue(elements[0].amount > 0);
+            }
+            Assert.NotNull(elements);
+        }
+
         /*[Test]
         public async Task TestCreatePayment()
         {

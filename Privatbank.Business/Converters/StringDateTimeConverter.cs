@@ -11,13 +11,13 @@ namespace Privatbank.Business.Converters
         {
             string[] formats =
             {
+                "yyyy-MM-dd'T'HH:mm:ss.fffzzz",
                 "dd.MM.yyyy HH:mm:ss",
                 "dd-MM-yyyy HH:mm:ss",
                 "dd-MM-yyyy",
                 "dd.MM.yyyy",
                 "HH:mm"
             };
-
             return DateTime.TryParseExact(
                 reader.GetString(),
                 formats,
