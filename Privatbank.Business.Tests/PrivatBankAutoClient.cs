@@ -16,6 +16,31 @@ namespace Privatbank.Business.Tests
                 Environment.GetEnvironmentVariable("CLIENT_TOKEN"));
         }
 
+        #region Balance
+
+        [Test]
+        public async Task TestGetBalance() {
+            var result = await _client.GetBalanceAsync(DateTime.Now);
+
+            Assert.IsNotEmpty(result);
+        }
+
+        [Test]
+        public async Task TestGetBalanceInterim() {
+            var result = await _client.GetBalanceInterimAsync();
+
+            Assert.IsNotEmpty(result);
+        }
+
+
+        [Test]
+        public async Task TestGetBalanceFinal() {
+            var result = await _client.GetBalanceFinalAsync();
+
+            Assert.IsNotEmpty(result);
+        } 
+        #endregion
+        
         [Test]
         public async Task TestStatementsSettings()
         {
@@ -29,34 +54,9 @@ namespace Privatbank.Business.Tests
             Assert.AreNotEqual(result.DateTimeOfFinalStatement, DateTime.MinValue);
         }
 
+        #region Transactions
         [Test]
-        public async Task TestGetBalance()
-        {
-            var result = await _client.GetBalanceAsync(DateTime.Now);
-
-            Assert.IsNotEmpty(result);
-        }
-
-        [Test]
-        public async Task TestGetBalanceInterim()
-        {
-            var result = await _client.GetBalanceInterimAsync();
-
-            Assert.IsNotEmpty(result);
-        }
-
-
-        [Test]
-        public async Task TestGetBalanceFinal()
-        {
-            var result = await _client.GetBalanceFinalAsync();
-
-            Assert.IsNotEmpty(result);
-        }
-
-        [Test]
-        public async Task TestGetTransactions()
-        {
+        public async Task TestGetTransactions() {
             var result = await _client.GetTransactionsAsync(
                 DateTime.Now - TimeSpan.FromDays(30));
 
@@ -64,21 +64,28 @@ namespace Privatbank.Business.Tests
         }
 
         [Test]
-        public async Task TestGetTransactionsInterim()
-        {
+        public async Task TestGetTransactionsInterim() {
             var result = await _client.GetTransactionsInterimAsync();
-
             Assert.IsNotEmpty(result);
         }
 
         [Test]
-        public async Task TestGetTransactionsFinal()
-        {
+        public async Task TestGetTransactionsFinal() {
             var result = await _client.GetTransactionsFinalAsync();
 
             Assert.NotNull(result);
         }
-
+        #endregion
+        [Test]
+        public async Task TestGetGroups() {
+            var result = await _client.GetGroupsAsync();
+            if (result.Length != 0) {
+                Assert.IsTrue(result[0].comission_rate >= 0);
+                Assert.IsTrue(result[0].comission_rate < 1);
+            }
+            Assert.NotNull(result);
+        }
+        
         /*[Test]
         public async Task TestCreatePayment()
         {

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Privatbank.Business.Tests": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}
