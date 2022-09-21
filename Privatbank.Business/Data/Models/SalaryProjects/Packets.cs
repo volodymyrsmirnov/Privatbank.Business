@@ -40,7 +40,6 @@ namespace Privatbank.Business.Data.Models.SalaryProjects {
         /// <summary>
         /// status, <see cref="Packet_Status"/>
         /// </summary>
-        [JsonConverter(typeof(JsonStringEnumConverter))]
         [JsonPropertyName("status")]
         public Packet_Status status { get; set; }
 
@@ -49,7 +48,6 @@ namespace Privatbank.Business.Data.Models.SalaryProjects {
         /// sub status <see cref="Packet_Sub_Status"/>
         /// </summary>
         [JsonPropertyName("substatus")]
-        [JsonConverter(typeof(JsonStringEnumConverter))]
         public Packet_Sub_Status sub_status { get; set; }
 
         /// <summary>
