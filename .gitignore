@@ -351,3 +351,4 @@ MigrationBackup/
 
 # Exclude unit test Runsettings 
 *.runsettings
+.vscode/*

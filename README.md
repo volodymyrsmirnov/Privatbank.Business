@@ -4,8 +4,11 @@
 
 This library allows you to quickly and easily use the Privatbank AutoClient API for obtaining balance sheets, transactions and creating outgoing payments for the corporate users (legal entities and entrepreneurs).
 
-For now, this library does not have a functionality to querying exchange rates, working with digital documents and e-statements. Feel free to send PRs or raise an issue if you need them.  
+For now, this library does not have a functionality to querying exchange rates, working with digital documents and e-statements. Feel free to send PRs or raise an issue if you need them.
 
+
+**see [changelog.md](./Privatbank.Business/CHANGELOG.md)**
+---
 ## Installation 
 
 ### Prerequisites
