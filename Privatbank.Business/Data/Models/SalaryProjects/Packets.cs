@@ -19,9 +19,9 @@ namespace Privatbank.Business.Data.Models.SalaryProjects {
         /// <summary>
         /// salary system type
         /// </summary>
-        //[JsonConverter(typeof(JsonStringEnumConverter))]
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         [JsonPropertyName("system")]
-        public string/*SalarySystem*/ system { get; set; }
+        public SalarySystem system { get; set; }
 
         /// <summary>
         /// created at
@@ -40,16 +40,17 @@ namespace Privatbank.Business.Data.Models.SalaryProjects {
         /// <summary>
         /// status, <see cref="Packet_Status"/>
         /// </summary>
-        //[JsonConverter(typeof(JsonStringEnumConverter))]
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         [JsonPropertyName("status")]
-        public string/*Packet_Status*/ status { get; set; }
+        public Packet_Status status { get; set; }
 
 
         /// <summary>
         /// sub status <see cref="Packet_Sub_Status"/>
         /// </summary>
         [JsonPropertyName("substatus")]
-        public string/*Packet_Sub_Status*/ sub_status { get; set; }
+        [JsonConverter(typeof(JsonStringEnumConverter))]
+        public Packet_Sub_Status sub_status { get; set; }
 
         /// <summary>
         /// name
