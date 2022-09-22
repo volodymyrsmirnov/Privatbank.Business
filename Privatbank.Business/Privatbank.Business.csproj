@@ -11,11 +11,11 @@
         <RepositoryUrl>https://github.com/mindcollapse/Privatbank.Business</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <PackageTags>privatbank;api;ukraine</PackageTags>
-        <AssemblyVersion>1.0.2</AssemblyVersion>
-        <FileVersion>1.0.2</FileVersion>
+        <AssemblyVersion>1.0.3</AssemblyVersion>
+        <FileVersion>1.0.3</FileVersion>
         <Authors>Volodymyr Smirnov</Authors>
         <Company>Volodymyr Smirnov</Company>
-        <PackageVersion>1.0.2</PackageVersion>
+        <PackageVersion>1.0.3</PackageVersion>
     </PropertyGroup>
 
     <ItemGroup>
