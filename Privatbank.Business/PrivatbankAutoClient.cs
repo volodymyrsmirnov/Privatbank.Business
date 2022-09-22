@@ -35,6 +35,27 @@ namespace Privatbank.Business {
         }
 
         /// <summary>
+        /// Initialize API AutoClient.
+        /// </summary>
+        /// <param name="clientId">Client id.</param>
+        /// <param name="clientToken">Client token.</param>
+        /// <exception cref="ArgumentNullException">Mandatory parameter has not been provided.</exception>
+        public PrivatbankAutoClient(string clientId, string clientToken) {
+            if (string.IsNullOrEmpty(clientId))
+                throw new ArgumentNullException(nameof(clientId));
+
+            if (string.IsNullOrEmpty(clientToken))
+                throw new ArgumentNullException(nameof(clientToken));
+
+            _httpClient = new HttpClient {
+                BaseAddress = new Uri(ApiBaseAddress)
+            };
+
+            _httpClient.DefaultRequestHeaders.Add("id", clientId);
+            _httpClient.DefaultRequestHeaders.Add("token", clientToken);
+        }
+
+        /// <summary>
         /// Dispose API client.
         /// </summary>
         public void Dispose() {
@@ -292,9 +313,9 @@ namespace Privatbank.Business {
         /// </summary>
         /// <param name="group"></param>
         /// <returns></returns>
-        public async Task<List<Receiver>> GetRecipientsAsync(Group group) {
+        public async Task<List<Receiver>> GetRecipientsAsync(Data.Enums.SalaryProjects.GroupType type) {
             Dictionary<string, string> qparams = new Dictionary<string, string>();
-            qparams.Add("group", group.type.ToString());
+            qparams.Add("group", type.ToString());
             return await GetRecordsFromApiWithQParams<ReceiverResponce, Receiver>("pay/mp/list-receivers", r => r.Receivers, qparams);
         }
         #endregion

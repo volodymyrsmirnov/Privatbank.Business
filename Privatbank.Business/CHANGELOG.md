@@ -5,9 +5,11 @@
    - `Transaction.DocumentType`
    - `Transaction.Status`
    - `Transaction.Real`
-## 1.2 - salary groups
+
+## 1.2 - salary groups, api 3-0-0
   added salary groups:
   - get salary groups `GetGroupsAsync()`
+  - get salary groups recipients `GetRecipientsAsync(GroupType type)`
   - get packets `GetPacketsAsync(DateTime from, DateTime to)`
   - get packet elements `GetPacketEntriesAsync(Packet packet)`
 
