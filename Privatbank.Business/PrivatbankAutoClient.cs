@@ -82,6 +82,49 @@ namespace Privatbank.Business {
             return result.ToArray();
         }
 
+        /// <summary>
+        /// this method is used to deliver results with pagination through query params "page" and "page-size"
+        /// </summary>
+        /// <typeparam name="TResponse">responce with a list of TRecord</typeparam>
+        /// <typeparam name="TRecord">desired type</typeparam>
+        /// <param name="uri">pase uri withought any params or '?' at the end</param>
+        /// <param name="getter">getter fuction that return TRecord</param>
+        /// <param name="qpar">other params</param>
+        /// <returns>list of desired objects</returns>
+        // this is ugly because there already is  method for pagination? yes, but it uses other query parameters, so no.
+        private async Task<List<TRecord>> GetRecordsFromApiWithQParams<TResponse, TRecord>(string uri, Func<TResponse, TRecord[]> getter, Dictionary<string, string> qpar = null) where TResponse : BasicResponse {
+            if (qpar == null) qpar = new Dictionary<string, string>();
+            int page = 0, page_size = 100; //page_size max 100 for api
+            string page_par = "page";
+            string page_size_par = "page-size";
+            // strictly speaking this needs to be checked if exists
+            qpar.Add(page_par, page.ToString());
+            qpar.Add(page_size_par, page_size.ToString());
+            var result = new List<TRecord>();
+            TResponse responce;
+            do {
+                qpar[page_par] = page.ToString();
+                responce = await GetDataFromApi<TResponse>(BuildURI(uri, qpar));
+                result.AddRange(getter(responce));
+                page++;
+            } while (getter(responce).Length == page_size);
+            return result;
+        }
+
+        /// <summary>
+        /// build URI with query params past as Dictionary
+        /// </summary>
+        /// <param name="uri">base usi</param>
+        /// <param name="qparams">params with key being param name</param>
+        /// <returns></returns>
+        private string BuildURI(string uri, Dictionary<string, string> qparams) {
+            string result = "?";
+            foreach (var val in qparams) {
+                result += $"{val.Key}={val.Value}&";
+            }
+            return uri + result;
+        }
+
         private static string BuildUri(string uri, string account = null, DateTime? startDate = null,
             DateTime? endDate = null, string followId = null)
         {
@@ -220,12 +263,13 @@ namespace Privatbank.Business {
 
         #endregion
 
+        #region salary_groups
         /// <summary>
         /// Get salary groups.
         /// </summary>
         /// <returns><see cref="Group"/></returns>
-        public async Task<Group[]> GetGroupsAsync() {
-            return await GetRecordsFromApi<GroupsResponse, Group>(
+        public async Task<List<Group>> GetGroupsAsync() {
+            return await GetRecordsFromApiWithQParams<GroupsResponse, Group>(
                 "pay/mp/list-groups", r => r.Groups);
         }
 
@@ -234,20 +278,10 @@ namespace Privatbank.Business {
         /// </summary>
         /// <returns></returns>
         public async Task<List<Packet>> GetPacketsAsync(DateTime from, DateTime to) {
-            // IMPORTANT: this code reapeats? I dont want to refactor the whole nuget for this
-            List<Packet> result = new List<Packet>();
-            PacketsResponse responce;
-            string api_path;
-            int page = 0, page_size = 100; //page_size max 100 for api
-            // this is ugly because there already is  method for pagination? yes, but it uses other query parameters, so no.
-            do {
-                api_path = $"pay/apay24/packets/list?page={page}&page-size={page_size}&from={from:yyyy-MM-dd}&to={to:yyyy-MM-dd}";
-                responce = await GetDataFromApi<PacketsResponse>(api_path);
-
-                result.AddRange(responce.Packets);
-                page++;
-            } while (responce.Packets.Length == 100);
-            return result;
+            Dictionary<string, string> qparams = new Dictionary<string, string>();
+            qparams.Add("from", $"{from:yyyy-MM-dd}");
+            qparams.Add("to", $"{to:yyyy-MM-dd}");
+            return await GetRecordsFromApiWithQParams<PacketsResponse, Packet>($"pay/apay24/packets/list", r => r.Packets, qparams);
         }
 
         /// <summary>
@@ -256,24 +290,25 @@ namespace Privatbank.Business {
         /// <param name="packet">a packet returned by api peforehand, or just it ref num</param>
         /// <returns>list of all entries for a specific packet</returns>
         public async Task<List<PacketEntrie>> GetPacketEntriesAsync(Packet packet) {
-            // IMPORTANT: this code reapeats? I dont want to refactor the whole nuget for this
             // no switch because there is no public api for any other then "maspay", although I`m sure the other one is identical
             // and has endpoint */reqpay/*
             // so for know - no
             //switch (packet.system)
-            List<PacketEntrie> result = new List<PacketEntrie>();
-            PacketEntriesResponse responce;
-            string api_path;
-            int page = 0, page_size = 100; //page_size max 100 for api
-            // this is ugly because there already is  method for pagination? yes, but it uses other query parameters, so no.
-            do {
-                api_path = $"pay/maspay/{packet.reference}/content?page={page}&page-size={page_size}";
-                responce = await GetDataFromApi<PacketEntriesResponse>(api_path);
 
-                result.AddRange(responce.PacketEntries);
-                page++;
-            } while (responce.PacketEntries.Length == 100);
-            return result;
+            //use this method because it uses pages not pagination token
+            return await GetRecordsFromApiWithQParams<PacketEntriesResponse, PacketEntrie>($"pay/maspay/{packet.reference}/content", r => r.PacketEntries);
         }
+
+        /// <summary>
+        /// gets recipients of a salary group
+        /// </summary>
+        /// <param name="group"></param>
+        /// <returns></returns>
+        public async Task<List<Receiver>> GetRecipientsAsync(Group group) {
+            Dictionary<string, string> qparams = new Dictionary<string, string>();
+            qparams.Add("group", group.type.ToString());
+            return await GetRecordsFromApiWithQParams<ReceiverResponce, Receiver>("pay/mp/list-receivers", r => r.Receivers, qparams);
+        } 
+        #endregion
     }
 }

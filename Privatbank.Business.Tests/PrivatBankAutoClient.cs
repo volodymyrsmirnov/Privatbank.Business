@@ -77,9 +77,15 @@ namespace Privatbank.Business.Tests
         }
         #endregion
         [Test]
+        public async Task TestGetRecipientsAsync() {
+            var recipeints = _client.GetRecipientsAsync(new Data.Models.SalaryProjects.Group { type = Data.Enums.SalaryProjects.GroupType.SALARY});
+            Assert.NotNull(recipeints);
+        }
+
+        [Test]
         public async Task TestGetGroups() {
             var result = await _client.GetGroupsAsync();
-            if (result.Length != 0) {
+            if (result.Count != 0) {
                 Assert.IsTrue(result[0].comission_rate >= 0);
                 Assert.IsTrue(result[0].comission_rate < 1);
             }
