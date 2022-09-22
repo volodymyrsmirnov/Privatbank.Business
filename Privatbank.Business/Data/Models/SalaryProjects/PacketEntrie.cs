@@ -1,5 +1,4 @@
 ﻿using Privatbank.Business.Data.Enums.SalaryProjects;
-using System;
 using System.Text.Json.Serialization;
 
 namespace Privatbank.Business.Data.Models.SalaryProjects {
@@ -48,7 +47,7 @@ namespace Privatbank.Business.Data.Models.SalaryProjects {
         /// </summary>
         [JsonPropertyName("amount")]
         public decimal amount { get; set; }
-        
+
         /// <summary>
         /// status code
         /// </summary>

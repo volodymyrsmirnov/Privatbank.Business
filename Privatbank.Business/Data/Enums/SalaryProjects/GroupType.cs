@@ -1,7 +1,10 @@
-﻿namespace Privatbank.Business.Data.Enums.SalaryProjects {
+﻿using System.Text.Json.Serialization;
+
+namespace Privatbank.Business.Data.Enums.SalaryProjects {
     /// <summary>
     /// group salary type
     /// </summary>
+    [JsonConverter(typeof(JsonStringEnumConverterWithAttributeSupport))]
     public enum GroupType {
         /// <summary>
         /// project type

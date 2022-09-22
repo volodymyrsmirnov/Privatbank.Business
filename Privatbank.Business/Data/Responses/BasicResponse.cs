@@ -1,9 +1,7 @@
 using System.Text.Json.Serialization;
 
-namespace Privatbank.Business.Data.Responses
-{
-    internal class BasicResponse
-    {
+namespace Privatbank.Business.Data.Responses {
+    internal class BasicResponse {
         [JsonPropertyName("exist_next_page")]
         public bool HasPagination { get; set; }
 

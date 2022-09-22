@@ -1,14 +1,12 @@
+using Privatbank.Business.Converters;
 using System;
 using System.Text.Json.Serialization;
-using Privatbank.Business.Converters;
 
-namespace Privatbank.Business.Data.Models
-{
+namespace Privatbank.Business.Data.Models {
     /// <summary>
     /// Statements settings.
     /// </summary>
-    public class StatementsSettings
-    {
+    public class StatementsSettings {
         /// <summary>
         /// Operational phase of the bank.
         /// </summary>

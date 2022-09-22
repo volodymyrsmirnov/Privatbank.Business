@@ -1,12 +1,10 @@
 using System.Text.Json.Serialization;
 
-namespace Privatbank.Business.Data.Models
-{
+namespace Privatbank.Business.Data.Models {
     /// <summary>
     /// Payment result.
     /// </summary>
-    public class PaymentResult
-    {
+    public class PaymentResult {
         /// <summary>
         /// Payment reference.
         /// </summary>

@@ -1,13 +1,11 @@
 using System;
 using System.Text.Json.Serialization;
 
-namespace Privatbank.Business.Data.Models
-{
+namespace Privatbank.Business.Data.Models {
     /// <summary>
     /// Outgoing payment record.
     /// </summary>
-    public class Payment
-    {
+    public class Payment {
         /// <summary>
         /// Document number.
         /// </summary>

@@ -1,5 +1,5 @@
-﻿using System.Text.Json.Serialization;
-using Privatbank.Business.Data.Models.SalaryProjects;
+﻿using Privatbank.Business.Data.Models.SalaryProjects;
+using System.Text.Json.Serialization;
 
 namespace Privatbank.Business.Data.Responses {
     internal class GroupsResponse : BasicResponse {

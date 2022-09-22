@@ -1,14 +1,12 @@
+using Privatbank.Business.Converters;
 using System;
 using System.Text.Json.Serialization;
-using Privatbank.Business.Converters;
 
-namespace Privatbank.Business.Data.Models
-{
+namespace Privatbank.Business.Data.Models {
     /// <summary>
     /// Transaction.
     /// </summary>
-    public class Transaction
-    {
+    public class Transaction {
         /// <summary>
         /// Recipient code.
         /// </summary>

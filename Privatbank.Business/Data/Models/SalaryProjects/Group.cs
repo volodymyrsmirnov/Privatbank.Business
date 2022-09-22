@@ -1,6 +1,4 @@
-﻿using Privatbank.Business.Converters;
-using Privatbank.Business.Data.Enums.SalaryProjects;
-using System.Runtime.Serialization;
+﻿using Privatbank.Business.Data.Enums.SalaryProjects;
 using System.Text.Json.Serialization;
 
 namespace Privatbank.Business.Data.Models.SalaryProjects {

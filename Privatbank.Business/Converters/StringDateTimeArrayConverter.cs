@@ -4,12 +4,9 @@ using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Privatbank.Business.Converters
-{
-    internal class StringDateTimeArrayConverter : JsonConverter<DateTime[]>
-    {
-        public override DateTime[] Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-        {
+namespace Privatbank.Business.Converters {
+    internal class StringDateTimeArrayConverter : JsonConverter<DateTime[]> {
+        public override DateTime[] Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) {
             var resultList = new List<DateTime>();
 
             if (reader.TokenType == JsonTokenType.StartArray)
@@ -25,8 +22,7 @@ namespace Privatbank.Business.Converters
             return resultList.ToArray();
         }
 
-        public override void Write(Utf8JsonWriter writer, DateTime[] value, JsonSerializerOptions options)
-        {
+        public override void Write(Utf8JsonWriter writer, DateTime[] value, JsonSerializerOptions options) {
             throw new NotImplementedException();
         }
     }
